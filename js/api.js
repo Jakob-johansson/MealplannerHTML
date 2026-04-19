@@ -22,7 +22,7 @@ async function fetchNutrition(ingredientName) {
 
     try {
         const response = await fetch(
-            `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(query)}&pageSize=10&dataType=SR%20Legacy&api_key=${API_KEY}`
+            `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(query)}&pageSize=25&dataType=SR%20Legacy&api_key=${API_KEY}`
         );
         const data = await response.json();
 
@@ -30,7 +30,7 @@ async function fetchNutrition(ingredientName) {
 
         const ranked = rankAllResults(data.foods, query);
 
-      return ranked.slice(0, 5).map(food => {
+      return ranked.slice(0, 10).map(food => {
     const get = (name) => {
         const n = food.foodNutrients.find(x => x.nutrientName === name);
         

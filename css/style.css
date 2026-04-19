@@ -805,3 +805,32 @@ body {
 .input-wrapper .form-input {
     width: 100%;
 }
+.autocomplete-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    z-index: 100;
+    overflow-y: auto;
+    max-height: 280px;
+    margin-top: 4px;
+}
+
+.autocomplete-name {
+    font-size: 15px;
+    color: var(--text-primary);
+}
+
+.autocomplete-name strong {
+    color: var(--accent);
+    font-weight: 700;
+}
+.search-results {
+    margin-top: 8px;
+    max-height: 420px;
+    overflow-y: auto;
+}
