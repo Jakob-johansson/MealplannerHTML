@@ -1,13 +1,12 @@
-
 let currentDate = null;
 let currentSlot = null;
 let currentIngredients = [];
 let lastSearchResults = null;
 
-lastSearchResults = results;
-renderSearchResults(results);
-function showLastResults(){
-    if(!lastSearchResults) return;
+function showLastResults() {
+    if (!lastSearchResults) return;
+    const list = document.getElementById("ingredient-list");
+    list.innerHTML = "";
     renderSearchResults(lastSearchResults);
 }
 
@@ -17,7 +16,6 @@ function openAddMeal(slotElement) {
     currentIngredients = [];
 
     const app = document.getElementById("app");
-
     const hasSavedMeals = state.meals.length > 0;
 
     app.innerHTML = `
@@ -46,10 +44,12 @@ function openAddMeal(slotElement) {
         </div>
 
         <div class="form-group">
-            <label class="form-label">lägg till ingridiens</label>
+            <label class="form-label">Lägg till ingrediens</label>
             <div class="search-row">
-                <input class="form-input" id="ingredient-input" 
-                       type="text" placeholder="T.ex kyckling och ris">
+                <div class="input-wrapper">
+                    <input class="form-input" id="ingredient-input" 
+                           type="text" placeholder="T.ex kyckling">
+                </div>
                 <button class="search-btn" onclick="searchIngredient()">Sök</button>
             </div>
             <p id="search-error" class="error-text"></p>
@@ -61,9 +61,10 @@ function openAddMeal(slotElement) {
     `;
     initAutocomplete("ingredient-input");
 }
+
 function pickMealFromLibrary(mealId) {
     const day = state.days.find(d => d.date === currentDate) || createDay(currentDate);
-    
+
     if (!state.days.find(d => d.date === currentDate)) {
         state.days.push(day);
     }
@@ -73,13 +74,14 @@ function pickMealFromLibrary(mealId) {
     storage.save(state);
     renderHome();
 }
+
 async function searchIngredient() {
     const input = document.getElementById("ingredient-input");
     const error = document.getElementById("search-error");
     const name  = input.value.trim();
 
     if (!name) {
-        error.textContent = "Lägg till en måltid först.";
+        error.textContent = "Lägg till en ingrediens först.";
         return;
     }
 
@@ -98,9 +100,11 @@ async function searchIngredient() {
         return;
     }
 
+    lastSearchResults = results;
     renderSearchResults(results);
     input.value = "";
 }
+
 function renderSearchResults(results) {
     const list = document.getElementById("ingredient-list");
 
@@ -154,10 +158,10 @@ function selectIngredient(index) {
             </div>
             <div class="amount-actions">
                 <button class="back-search-btn" onclick="showLastResults()">
-                    Tillbaka  till resultat
+                    Tillbaka till resultat
                 </button>
                 <button class="confirm-btn" onclick="confirmIngredient(${index})">
-                    Lägg till ingridiens
+                    Lägg till ingrediens
                 </button>
             </div>
         </div>
@@ -218,13 +222,13 @@ function confirmIngredient(index) {
     };
 
     currentIngredients.push(ingredient);
-    
 
     list.innerHTML = "";
     list._searchResults = null;
 
     renderIngredientList();
 }
+
 function renderIngredientList() {
     const list = document.getElementById("ingredient-list");
     if (!list) return;
@@ -247,6 +251,7 @@ function renderIngredientList() {
         </div>
     `).join("");
 }
+
 function removeIngredient(index) {
     currentIngredients.splice(index, 1);
     renderIngredientList();
@@ -258,15 +263,15 @@ function saveMeal() {
     const name = nameInput.value.trim();
 
     if (!name) {
-        error.textContent = "Ge måltiden ett namn";
+        error.textContent = "Ge måltiden ett namn.";
         return;
     }
 
     if (currentIngredients.length === 0) {
-        error.textContent = "Lägg till minst 1 måltid.";
+        error.textContent = "Lägg till minst en ingrediens.";
         return;
     }
-   
+
     const meal = createMeal(name, currentSlot);
     meal.ingredients = currentIngredients;
 

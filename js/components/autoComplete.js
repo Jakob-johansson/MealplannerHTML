@@ -1,15 +1,16 @@
-
-
 function initAutocomplete(inputId) {
     const input = document.getElementById(inputId);
     if (!input) return;
+
+    const wrapper = input.parentNode;
+    wrapper.style.position = "relative";
+    wrapper.style.flex = "1";
 
     const suggestions = Object.keys(TRANSLATIONS);
 
     const dropdown = document.createElement("div");
     dropdown.className = "autocomplete-dropdown hidden";
-    input.parentNode.style.position = "relative";
-    input.parentNode.appendChild(dropdown);
+    wrapper.appendChild(dropdown);
 
     input.addEventListener("input", () => {
         const value = input.value.toLowerCase().trim();
@@ -36,7 +37,7 @@ function initAutocomplete(inputId) {
     });
 
     document.addEventListener("click", (e) => {
-        if (!input.parentNode.contains(e.target)) {
+        if (!wrapper.contains(e.target)) {
             dropdown.classList.add("hidden");
         }
     });

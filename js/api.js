@@ -37,10 +37,10 @@ async function fetchNutrition(ingredientName) {
         return n ? Math.round(n.value) : 0;
     };
 
-            return {
+           return {
                 id:       genId(),
                 name:     ingredientName,
-                label:    food.description,
+                label:    translateFoodLabel(food.description),
                 calories: get("Energy"),
                 protein:  get("Protein"),
                 fat:      get("Total lipid (fat)"),

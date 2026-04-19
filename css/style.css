@@ -797,3 +797,11 @@ body {
     border-radius: var(--radius-md);
     border: 1.5px dashed var(--border);
 }
+.input-wrapper {
+    flex: 1;
+    position: relative;
+}
+
+.input-wrapper .form-input {
+    width: 100%;
+}
