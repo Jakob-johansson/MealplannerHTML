@@ -2,6 +2,14 @@
 let currentDate = null;
 let currentSlot = null;
 let currentIngredients = [];
+let lastSearchResults = null;
+
+lastSearchResults = results;
+renderSearchResults(results);
+function showLastResults(){
+    if(!lastSearchResults) return;
+    renderSearchResults(lastSearchResults);
+}
 
 function openAddMeal(slotElement) {
     currentDate = slotElement.dataset.date;
@@ -145,7 +153,7 @@ function selectIngredient(index) {
                 ${renderNutritionPreview(selected, 100)}
             </div>
             <div class="amount-actions">
-                <button class="back-search-btn" onclick="searchIngredient()">
+                <button class="back-search-btn" onclick="showLastResults()">
                     Tillbaka  till resultat
                 </button>
                 <button class="confirm-btn" onclick="confirmIngredient(${index})">
