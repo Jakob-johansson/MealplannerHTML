@@ -6,13 +6,103 @@ function renderHome() {
     const today    = getTodayString();
     const tomorrow = getTomorrowString();
 
+    const greetingText = getGreeting();
+
     app.innerHTML = `
         <h1 class="view-title">Hem</h1>
-        ${renderDaySection(today,    "Idag")}
-        ${renderDaySection(tomorrow, "Imorgon")}
+
+        <div class="home-layout">
+
+            <div class="home-left">
+                <div class="home-hero">
+                    <div class="weather-icon" id="time-icon">☀️</div>
+                    <div class="clock" id="clock">00:00</div>
+                    <div class="greeting" id="greeting">${greetingText}</div>
+                </div>
+            </div>
+
+            <div class="home-right">
+                ${renderDaySection(today, "Idag")}
+                ${renderDaySection(tomorrow, "Imorgon")}
+            </div>
+
+        </div>
     `;
+
+    updateHomeTime();
+    setInterval(updateHomeTime, 1000);
 }
 
+function getRandom(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+function getGreeting() {
+    const hours = new Date().getHours();
+
+    const morningGreetings = [
+        "God morgon! Redo för dagen?",
+        "God morgon, dags att köra igång 💪",
+        "Morgon! Vad blir det till frukost?",
+        "God morgon ☀️ hoppas du sov gott!"
+    ];
+
+    const afternoonGreetings = [
+        "God eftermiddag! Hur går dagen?",
+        "Lunchdags kanske? 🍽️",
+        "Eftermiddagspower! ⚡",
+        "Hoppas dagen flyter på bra!"
+    ];
+
+    const eveningGreetings = [
+        "God kväll! Dags att varva ner 🌇",
+        "Kväll nu – vad blir det till middag?",
+        "Hoppas du haft en bra dag!",
+        "Snart dags att koppla av 😌"
+    ];
+
+    const nightGreetings = [
+        "God natt 🌙 dags att vila",
+        "Sent nu – kanske lite nattmat?",
+        "Sover du än? 😄",
+        "Nattläge aktiverat 🌙"
+    ];
+
+    if (hours >= 5 && hours < 12) {
+        return getRandom(morningGreetings);
+    } else if (hours >= 12 && hours < 18) {
+        return getRandom(afternoonGreetings);
+    } else if (hours >= 18 && hours < 22) {
+        return getRandom(eveningGreetings);
+    } else {
+        return getRandom(nightGreetings);
+    }
+}
+function updateHomeTime() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+
+    const clock = document.getElementById("clock");
+    const icon = document.getElementById("time-icon");
+
+    if (!clock || !icon) return;
+
+    clock.textContent = `${hours}:${minutes}`;
+
+    let emoji = "☀️";
+
+    if (hours >= 5 && hours < 12) {
+        emoji = "🌤️";
+    } else if (hours >= 12 && hours < 18) {
+        emoji = "☀️";
+    } else if (hours >= 18 && hours < 22) {
+        emoji = "🌇";
+    } else {
+        emoji = "🌙";
+    }
+
+    icon.textContent = emoji;
+}
 function getTodayString() {
     return new Date().toISOString().slice(0, 10);
 }

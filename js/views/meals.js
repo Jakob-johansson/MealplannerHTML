@@ -82,14 +82,14 @@ function editMeal(mealId){
         <div class="form-group">
             <label class="form-label">Måltidsnamn</label>
             <input class="form-input" id="meal-name-input" 
-                   type="text" value="${meal.name}">
+                   type="text" autocomplete="off"   autocorrect="off"   autocapitalize="off"   spellcheck="false" value="${meal.name}">
         </div>
 
         <div class="form-group">
             <label class="form-label">Lägg till ingridienser</label>
             <div class="search-row">
                 <input class="form-input" id="ingredient-input" 
-                       type="text" placeholder="T.ex Kyckling">
+                       type="text" autocomplete="off"   autocorrect="off"   autocapitalize="off"   spellcheck="false"placeholder="T.ex Kyckling">
                 <button class="search-btn" onclick="searchIngredient()">Sök</button>
             </div>
             <p id="search-error" class="error-text"></p>

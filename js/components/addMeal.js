@@ -40,7 +40,7 @@ function openAddMeal(slotElement) {
         <div class="form-group">
             <label class="form-label">Måltidsnamn</label>
             <input class="form-input" id="meal-name-input" 
-                   type="text" placeholder="T.ex kyckling och ris">
+                   type="text" autocomplete="off"   autocorrect="off"   autocapitalize="off"   spellcheck="false" placeholder="T.ex kyckling och ris">
         </div>
 
         <div class="form-group">
@@ -48,7 +48,7 @@ function openAddMeal(slotElement) {
             <div class="search-row">
                 <div class="input-wrapper">
                     <input class="form-input" id="ingredient-input" 
-                           type="text" placeholder="T.ex kyckling">
+                           type="text" autocomplete="off"   autocorrect="off"   autocapitalize="off"   spellcheck="false" placeholder="T.ex kyckling">
                 </div>
                 <button class="search-btn" onclick="searchIngredient()">Sök</button>
             </div>
@@ -116,8 +116,8 @@ function renderSearchResults(results) {
                      data-index="${index}">
                     <span class="result-label">${r.label}</span>
                     <span class="result-stats">
-                        ${r.calories} kcal · ${r.protein}g Protein · 
-                        ${r.fat}g Fett · ${r.carbs}g Kolhydrater
+                       ${r.calories} kcal · ${r.protein}g Protein · 
+                       ${r.fat}g Fett (${r.fatPercent}% av kalorier) · ${r.carbs}g Kolhydrater
                         <em style="font-size:11px;color:#aaa"> per 100g</em>
                     </span>
                 </div>
@@ -141,7 +141,7 @@ function selectIngredient(index) {
             <p class="per-100g">
                 Per 100g: ${selected.calories} kcal · 
                 ${selected.protein}g Protein · 
-                ${selected.fat}g Fett · 
+                ${selected.fat}g Fett (${selected.fatPercent}%)
                 ${selected.carbs}g Kolhydrater
             </p>
             <div class="amount-row">
@@ -149,6 +149,10 @@ function selectIngredient(index) {
                 <input class="form-input amount-input" 
                        id="amount-input" 
                        type="number" 
+                       autocomplete="off"   
+                       autocorrect="off"   
+                       autocapitalize="off"   
+                       spellcheck="false"
                        value="100" 
                        min="1"
                        oninput="updateNutritionPreview(${index})">

@@ -7,27 +7,71 @@
 
 /* ── Tokens ── */
 :root {
-    --bg:           #a89678;
-    --surface:      #c4b090;
-    --surface-2:    #b8a482;
-    --border:       #9e8868;
-    --accent:       #5c3d1e;
-    --accent-light: #b8a070;
-    --accent-dark:  #3e2810;
-    --text-primary: #1a1408;
-    --text-secondary: #4e3d28;
-    --text-muted:   #6a5a40;
-    --red:          #c0392b;
-    --red-light:    #fdecea;
-    --green:        #4a7c59;
-    --green-light:  #eaf2ec;
-    --shadow-sm:    0 1px 3px rgba(20, 16, 8, 0.16);
-    --shadow-md:    0 4px 12px rgba(20, 16, 8, 0.24);
+    --bg:           #14110e;
+    --surface:      #1d1814;
+    --surface-2:    #241e19;
+    --border:       #332a22;
+
+    --accent:       #c2a07a;
+    --accent-light: #2a221c;
+    --accent-dark:  #a7845f;
+
+    --text-primary: #f2e9dd;
+    --text-secondary:#c9b8a3;
+    --text-muted:   #8f7f6d;
+
+    --red:          #ff6b6b;
+    --red-light:    rgba(255,107,107,0.1);
+
+    --green:        #7bd389;
+    --green-light:  rgba(123,211,137,0.1);
+
+    --shadow-sm:    0 2px 6px rgba(0,0,0,0.4);
+    --shadow-md:    0 10px 25px rgba(0,0,0,0.5);
+
     --radius-sm:    8px;
     --radius-md:    14px;
     --radius-lg:    20px;
 }
 
+.slot,
+.meal-card,
+.ingredient-row,
+.amount-picker,
+.search-result-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+.slot:hover,
+.meal-card:hover,
+.search-result-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    transition: 0.15s ease;
+}
+.search-btn,
+.save-btn,
+.confirm-btn {
+    background: var(--accent);
+    color: #1a1410;
+}
+
+.search-btn:hover,
+.save-btn:hover,
+.confirm-btn:hover {
+    background: var(--accent-dark);
+}
+.form-input {
+    background: var(--surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+
+.form-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(194,160,122,0.15);
+}
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -36,6 +80,13 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+
+    /* subtil “depth” bakgrund */
+    background-image: radial-gradient(
+        rgba(255,255,255,0.03) 1px,
+        transparent 1px
+    );
+    background-size: 22px 22px;
 }
 
 #app {
@@ -833,4 +884,86 @@ body {
     margin-top: 8px;
     max-height: 420px;
     overflow-y: auto;
+} 
+
+.home-layout {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
 }
+
+/* vänster sida */
+.home-left {
+    width: 180px;
+    position: sticky;
+    top: 20px;
+}
+
+/* höger sida */
+.home-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* hero styling lite mer kompakt */
+.home-hero {
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.weather-icon {
+    font-size: 64px;
+    margin-bottom: 10px;
+}
+
+.clock {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -1px;
+}
+
+.greeting {
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--text-muted);
+} 
+.weather-icon {
+    font-size: 54px;
+    margin-bottom: 8px;
+}
+
+.clock {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.greeting {
+    margin-top: 4px;
+} 
+.slot-meal {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+.slot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+.slot-info {
+    min-width: 0; 
