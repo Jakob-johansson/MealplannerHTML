@@ -113,6 +113,14 @@ body {
     letter-spacing: 0.1em;
     color: var(--text-muted);
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.day-date{
+    font-size: 0.85rem;
+    opacity: 0.6;
+    font-weight: 400;
 }
 
 
@@ -892,14 +900,14 @@ body {
     align-items: flex-start;
 }
 
-/* vänster sida */
+
 .home-left {
     width: 180px;
     position: sticky;
     top: 20px;
 }
 
-/* höger sida */
+
 .home-right {
     flex: 1;
     display: flex;
@@ -907,7 +915,7 @@ body {
     gap: 18px;
 }
 
-/* hero styling lite mer kompakt */
+
 .home-hero {
     text-align: left;
     background: var(--surface);
@@ -966,4 +974,4 @@ body {
     gap: 12px;
 }
 .slot-info {
-    min-width: 0; 
+    min-width: 0; }

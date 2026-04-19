@@ -125,7 +125,10 @@ function renderDaySection(dateString, label) {
 
     return `
         <section class="day-section">
-            <h2 class="day-title">${label}</h2>
+            <h2 class="day-title">
+            ${label}
+            <span class="day-date">${dateString}</span>
+            </h2>
             ${hasData ? renderDaySummary(totals) : ""}
             <div class="slots">
                 ${renderSlot(day, "breakfast", "Frukost", dateString)}
